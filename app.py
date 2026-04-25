@@ -11,7 +11,7 @@ app.secret_key = "student_secret_key"
 # ---------------- HOME ----------------
 @app.route("/")
 def home():
-    return render_template("home.html")
+     return redirect(url_for("login"))
 
 
 # ---------------- LOGIN ----------------
