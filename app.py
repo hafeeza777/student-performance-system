@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.secret_key = "student_secret_key"
 
 
-# ---------------- TEST ROUTE ----------------
+# ---------------- HOME ----------------
 @app.route("/")
 def home():
     return render_template("home.html")
@@ -76,7 +76,7 @@ def student_form():
 
 
 # ---------------- RESULT ----------------
-@app.route("/result", methods=["GET"])
+@app.route("/result")
 def result_page():
     if not session.get("subjects"):
         return redirect(url_for("student_form"))
@@ -96,7 +96,7 @@ def result_page():
 
 
 # ---------------- DASHBOARD ----------------
-@app.route("/dashboard", methods=["GET"])
+@app.route("/dashboard")
 def dashboard():
     if not session.get("subjects"):
         return redirect(url_for("student_form"))
@@ -115,8 +115,10 @@ def dashboard():
         marks=session.get("marks"),
         subjects=session.get("subjects")
     )
+
+
 # ---------------- CERTIFICATE PAGE ----------------
-@app.route("/certificate", methods=["GET"])
+@app.route("/certificate")
 def certificate():
     if not session.get("subjects"):
         return redirect(url_for("student_form"))
@@ -132,10 +134,8 @@ def certificate():
         issue_date=datetime.today().strftime("%d %B %Y")
     )
 
-# ---------------- DOWNLOAD CERTIFICATE PDF ----------------
-import pdfkit
-from flask import make_response
 
+# ---------------- DOWNLOAD CERTIFICATE (PDF) ----------------
 @app.route("/download_certificate")
 def download_certificate():
 
@@ -145,34 +145,34 @@ def download_certificate():
     if session.get("result") == "FAIL":
         return redirect(url_for("resource"))
 
-    rendered = render_template(
-        "certificate.html",
-        name=session.get("name"),
-        percentage=session.get("percentage"),
-        issue_date=datetime.today().strftime("%d %B %Y")
+    buffer = io.BytesIO()
+    c = canvas.Canvas(buffer, pagesize=A4)
+    width, height = A4
+
+    # Title
+    c.setFont("Helvetica-Bold", 24)
+    c.drawCentredString(width / 2, height - 100, "CERTIFICATE OF ACHIEVEMENT")
+
+    # Student Details
+    c.setFont("Helvetica", 16)
+    c.drawString(100, height - 200, f"Name: {session.get('name')}")
+    c.drawString(100, height - 240, f"Register No: {session.get('regno')}")
+    c.drawString(100, height - 280, f"Percentage: {session.get('percentage')}%")
+
+    # Date
+    current_date = datetime.now().strftime("%d-%m-%Y")
+    c.drawString(100, height - 320, f"Date: {current_date}")
+
+    c.save()
+    buffer.seek(0)
+
+    return send_file(
+        buffer,
+        as_attachment=True,
+        download_name="Certificate.pdf",
+        mimetype="application/pdf"
     )
 
-    config = pdfkit.configuration(
-        wkhtmltopdf=r"C:\Program Files (x86)\wkhtmltopdf\bin\wkhtmltopdf.exe"
-    )
-
-    options = {
-        "enable-local-file-access": None,
-        "page-size": "A4",
-        "orientation": "Landscape",
-        "margin-top": "10mm",
-        "margin-bottom": "10mm",
-        "margin-left": "10mm",
-        "margin-right": "10mm"
-    }
-
-    pdf = pdfkit.from_string(rendered, False, configuration=config, options=options)
-
-    response = make_response(pdf)
-    response.headers["Content-Type"] = "application/pdf"
-    response.headers["Content-Disposition"] = "attachment; filename=Certificate.pdf"
-
-    return response
 
 # ---------------- RESOURCE ----------------
 @app.route("/resource")
@@ -185,8 +185,9 @@ def resource():
         subjects=session.get("subjects")
     )
 
+
 # ---------------- LOGOUT ----------------
-@app.route("/logout", methods=["GET"])
+@app.route("/logout")
 def logout():
     session.clear()
     return redirect(url_for("login"))
@@ -194,4 +195,4 @@ def logout():
 
 # ---------------- RUN ----------------
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=True)
+    app.run()
