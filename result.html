@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Result</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #e6ebf1, #cfd8e3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            width: 700px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #e91e63;
+            margin-bottom: 25px;
+        }
+
+        .info {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+
+        th {
+            background-color: #e91e63;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #ffe6ef;
+        }
+
+        .summary {
+            font-size: 18px;
+            margin-top: 15px;
+        }
+
+        .summary p {
+            margin: 6px 0;
+        }
+
+        .pass {
+            color: green;
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .fail {
+            color: red;
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .btn {
+            display: block;
+            width: 220px;
+            margin: 25px auto 0;
+            padding: 12px;
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #c2185b;
+            transform: translateY(-2px);
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>EXAMINATION RESULT</h1>
+
+    <div class="info">
+        <p><strong>Name:</strong> {{ name }}</p>
+        <p><strong>Register Number:</strong> {{ regno }}</p>
+    </div>
+
+    <table>
+        <tr>
+            <th>Subject</th>
+            <th>Marks Obtained</th>
+        </tr>
+
+        {% for i in range(subjects|length) %}
+        <tr>
+            <td>{{ subjects[i] }}</td>
+            <td>{{ marks[i] }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    <div class="summary">
+        <p><strong>Total Marks:</strong> {{ total }}</p>
+        <p><strong>Maximum Marks Obtained:</strong> {{ maximum }}</p>
+        <p><strong>Minimum Marks Obtained:</strong> {{ minimum }}</p>
+        <p><strong>Percentage:</strong> {{ percentage }}%</p>
+
+        {% if result == "PASS" %}
+            <p class="pass">Result: CONGRATULATIONS YOU ARE PASS 🎉</p>
+            <a href="{{ url_for('dashboard') }}" class="btn">Go to Dashboard</a>
+        {% else %}
+            <p class="fail">Result: FAIL ❌</p>
+            <a href="{{ url_for('resource') }}" class="btn">View Learning Resources</a>
+        {% endif %}
+    </div>
+
+</div>
+
+</body>
+</html>

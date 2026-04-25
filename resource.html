@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Study Resources</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #e6ebf1, #cfd8e3);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 85%;
+            margin: auto;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #b30059;
+            margin-bottom: 40px;
+        }
+
+        .subject-card {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+            border-left: 8px solid #ff3366;
+        }
+
+        .subject-card h2 {
+            color: #cc0052;
+            margin-bottom: 10px;
+        }
+
+        .links a {
+            display: inline-block;
+            margin: 8px 10px 8px 0;
+            padding: 8px 15px;
+            background-color: #ff4d6d;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .links a:hover {
+            background-color: #b30059;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #660033;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>📚 Study Resources Portal📚</h1>
+
+    {% for subject in subjects %}
+    <div class="subject-card">
+        <h2>📘 {{ subject }}</h2>
+
+        <div class="links">
+            <a href="https://www.geeksforgeeks.org/" target="_blank">GeeksforGeeks</a>
+            <a href="https://www.w3schools.com/" target="_blank">W3Schools</a>
+            <a href="https://www.tutorialspoint.com/" target="_blank">TutorialsPoint</a>
+
+            <a onclick="window.open('https://mega.nz/folder/FKNlnB6D%239hOs96f7AylcLOGVeoh9Fg')">
+                Question Paper
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="footer">
+        💖 Keep Learning • Keep Growing • 💖
+    </div>
+
+</div>
+
+</body>
+</html>

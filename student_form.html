@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Entry Form</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #e6ebf1, #cfd8e3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            width: 500px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #c2135b;
+        }
+
+        h3 {
+            margin-top: 25px;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        label {
+            font-weight: bold;
+            color: #444;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #e91e63;
+            box-shadow: 0 0 5px rgba(102,126,234,0.5);
+        }
+
+        .subject-group {
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #c2185b;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #c2185b;
+            transform: translateY(-2px);
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+
+        <h2>STUDENT ENTRY FORM</h2>
+
+        <form method="POST">
+
+            <label>Student Name</label>
+            <input type="text" name="name" required>
+
+            <label>Register Number</label>
+            <input type="text" name="regno" required>
+
+            <h3>Enter 5 Subjects and Marks</h3>
+
+            <div class="subject-group">
+                <label>Subject 1</label>
+                <input type="text" name="subject1" required>
+                <input type="number" name="mark1" min="0" max="100" placeholder="Marks" required>
+            </div>
+
+            <div class="subject-group">
+                <label>Subject 2</label>
+                <input type="text" name="subject2" required>
+                <input type="number" name="mark2" min="0" max="100" placeholder="Marks" required>
+            </div>
+
+            <div class="subject-group">
+                <label>Subject 3</label>
+                <input type="text" name="subject3" required>
+                <input type="number" name="mark3" min="0" max="100" placeholder="Marks" required>
+            </div>
+
+            <div class="subject-group">
+                <label>Subject 4</label>
+                <input type="text" name="subject4" required>
+                <input type="number" name="mark4" min="0" max="100" placeholder="Marks" required>
+            </div>
+
+            <div class="subject-group">
+                <label>Subject 5</label>
+                <input type="text" name="subject5" required>
+                <input type="number" name="mark5" min="0" max="100" placeholder="Marks" required>
+            </div>
+
+            <button type="submit">Calculate Result</button>
+
+        </form>
+
+    </div>
+
+</body>
+</html>
