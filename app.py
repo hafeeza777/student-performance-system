@@ -135,43 +135,7 @@ def certificate():
     )
 
 
-# ---------------- DOWNLOAD CERTIFICATE (PDF) ----------------
-@app.route("/download_certificate")
-def download_certificate():
 
-    if not session.get("subjects"):
-        return redirect(url_for("student_form"))
-
-    if session.get("result") == "FAIL":
-        return redirect(url_for("resource"))
-
-    buffer = io.BytesIO()
-    c = canvas.Canvas(buffer, pagesize=A4)
-    width, height = A4
-
-    # Title
-    c.setFont("Helvetica-Bold", 24)
-    c.drawCentredString(width / 2, height - 100, "CERTIFICATE OF ACHIEVEMENT")
-
-    # Student Details
-    c.setFont("Helvetica", 16)
-    c.drawString(100, height - 200, f"Name: {session.get('name')}")
-    c.drawString(100, height - 240, f"Register No: {session.get('regno')}")
-    c.drawString(100, height - 280, f"Percentage: {session.get('percentage')}%")
-
-    # Date
-    current_date = datetime.now().strftime("%d-%m-%Y")
-    c.drawString(100, height - 320, f"Date: {current_date}")
-
-    c.save()
-    buffer.seek(0)
-
-    return send_file(
-        buffer,
-        as_attachment=True,
-        download_name="Certificate.pdf",
-        mimetype="application/pdf"
-    )
 
 
 # ---------------- RESOURCE ----------------
