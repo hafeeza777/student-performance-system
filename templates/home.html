@@ -10,7 +10,6 @@
             background: #eef1f5;
         }
 
-        /* NAVBAR */
         .navbar {
             background: #1e3a8a;
             color: white;
@@ -36,7 +35,6 @@
             opacity: 0.85;
         }
 
-        /* HERO SECTION */
         .hero {
             text-align: center;
             padding: 70px 20px 40px;
@@ -53,13 +51,34 @@
             color: #555;
         }
 
-        /* SECTION CONTAINER */
+        .login-buttons{
+            margin-top:30px;
+        }
+
+        .login-buttons a{
+            text-decoration:none;
+        }
+
+        .login-buttons button{
+            padding:12px 28px;
+            margin:10px;
+            font-size:18px;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+            background:#1e3a8a;
+            color:white;
+        }
+
+        .login-buttons button:hover{
+            background:#163172;
+        }
+
         .section {
             width: 1000px;
             margin: 30px auto;
         }
 
-        /* SUBJECT CARDS */
         .card-container {
             display: flex;
             gap: 25px;
@@ -87,7 +106,6 @@
             color: #333;
         }
 
-        /* FEATURES SECTION */
         .features {
             background: white;
             padding: 35px;
@@ -110,37 +128,55 @@
             color: #333;
         }
 
-        /* FOOTER SPACE */
         .spacer {
             height: 60px;
         }
+
     </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <div class="navbar">
-    <div class="nav-title">Student Evaluation System</div>
+    <div class="nav-title">
+        Student Evaluation System
+    </div>
 
     <div class="nav-links">
         <a href="{{ url_for('home') }}">Home</a>
-        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('login') }}">Student Login</a>
+        <a href="{{ url_for('teacher_login') }}">Teacher Portal</a>
     </div>
 </div>
 
-<!-- HERO -->
 <div class="hero">
+
     <h1>Student Performance Analysis and Evaluation System</h1>
-    <p>Academic evaluation, result processing and certificate generation platform</p>
+
+    <p>
+        Academic evaluation, result processing and certificate generation platform
+    </p>
+
+    <div class="login-buttons">
+
+        <a href="{{ url_for('login') }}">
+            <button>Student Login</button>
+        </a>
+
+        <a href="{{ url_for('teacher_login') }}">
+            <button>Teacher Portal</button>
+        </a>
+
+    </div>
+
 </div>
 
-<!-- SUBJECTS -->
+<div class="section">
 
-
-    <!-- FEATURES -->
     <div class="features">
+
         <h2>System Key Features</h2>
+
         <ul>
             <li>Student subject and marks entry</li>
             <li>Automatic performance evaluation</li>
@@ -150,81 +186,86 @@
             <li>Learning resources for improvement</li>
             <li>Question paper reference support</li>
         </ul>
+
     </div>
 
 </div>
 
 <div class="spacer"></div>
+
 <div class="section">
-    <div class="card-container">
 
-        <div class="card">
-            <div class="card-title">BCA Subjects</div>
-            <ul>
-                <li>Programming Fundamentals</li>
-                <li>Data Structures</li>
-                <li>Database Management System</li>
-                <li>Operating System</li>
-                <li>Computer Networks</li>
-                <li>Software Engineering</li>
-                <li>Web Technologies</li>
-                <li>Object Oriented Programming</li>
-            </ul>
-        </div>
+<div class="card-container">
 
-        <div class="card">
-            <div class="card-title">BBA Subjects</div>
-            <ul>
-                <li>Principles of Management</li>
-                <li>Financial Accounting</li>
-                <li>Marketing Management</li>
-                <li>Human Resource Management</li>
-                <li>Business Law</li>
-                <li>Business Environment</li>
-                <li>Organizational Behaviour</li>
-                <li>Entrepreneurship Development</li>
-            </ul>
-        </div>
+<div class="card">
+<div class="card-title">BCA Subjects</div>
+<ul>
+<li>Programming Fundamentals</li>
+<li>Data Structures</li>
+<li>Database Management System</li>
+<li>Operating System</li>
+<li>Computer Networks</li>
+<li>Software Engineering</li>
+<li>Web Technologies</li>
+<li>Object Oriented Programming</li>
+</ul>
+</div>
 
-        <div class="card">
-            <div class="card-title">B.Com Subjects</div>
-            <ul>
-                <li>Financial Accounting</li>
-                <li>Corporate Accounting</li>
-                <li>Cost Accounting</li>
-                <li>Business Law</li>
-                <li>Business Economics</li>
-                <li>Income Tax Law</li>
-                <li>Banking & Financial Services</li>
-                <li>Principles of Marketing</li>
-            </ul>
-        </div>
+<div class="card">
+<div class="card-title">BBA Subjects</div>
+<ul>
+<li>Principles of Management</li>
+<li>Financial Accounting</li>
+<li>Marketing Management</li>
+<li>Human Resource Management</li>
+<li>Business Law</li>
+<li>Business Environment</li>
+<li>Organizational Behaviour</li>
+<li>Entrepreneurship Development</li>
+</ul>
+</div>
 
-        <div class="card">
-            <div class="card-title">BA Subjects</div>
-            <ul>
-                <li>English Literature</li>
-                <li>History</li>
-                <li>Economics</li>
-                <li>Political Science</li>
-                <li>Sociology</li>
-                <li>Psychology</li>
-                <li>Journalism</li>
-            </ul>
-        </div>
+<div class="card">
+<div class="card-title">B.Com Subjects</div>
+<ul>
+<li>Financial Accounting</li>
+<li>Corporate Accounting</li>
+<li>Cost Accounting</li>
+<li>Business Law</li>
+<li>Business Economics</li>
+<li>Income Tax Law</li>
+<li>Banking & Financial Services</li>
+<li>Principles of Marketing</li>
+</ul>
+</div>
 
-        <div class="card">
-            <div class="card-title">Common Subjects</div>
-            <ul>
-                <li>English Communication</li>
-                <li>Environmental Studies</li>
-                <li>Basic Mathematics</li>
-                <li>Computer Fundamentals</li>
-                <li>Soft Skills</li>
-            </ul>
-        </div>
+<div class="card">
+<div class="card-title">BA Subjects</div>
+<ul>
+<li>English Literature</li>
+<li>History</li>
+<li>Economics</li>
+<li>Political Science</li>
+<li>Sociology</li>
+<li>Psychology</li>
+<li>Journalism</li>
+</ul>
+</div>
 
-    </div>
-</div
+<div class="card">
+<div class="card-title">Common Subjects</div>
+<ul>
+<li>English Communication</li>
+<li>Environmental Studies</li>
+<li>Basic Mathematics</li>
+<li>Computer Fundamentals</li>
+<li>Soft Skills</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+
 </body>
 </html>
