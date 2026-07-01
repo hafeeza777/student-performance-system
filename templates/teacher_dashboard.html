@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Teacher Dashboard</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Segoe UI,Arial,sans-serif;
+    background:#eef2f7;
+}
+
+.navbar{
+    background:#1e3a8a;
+    color:white;
+    padding:18px;
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.container{
+    width:92%;
+    margin:30px auto;
+}
+
+.cards{
+    display:flex;
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.card{
+    flex:1;
+    background:white;
+    border-radius:10px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 0 12px rgba(0,0,0,.15);
+    cursor:pointer;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-4px);
+}
+
+.card h3{
+    margin:0;
+    color:#1e3a8a;
+}
+
+.card h1{
+    margin-top:15px;
+    color:#222;
+}
+
+.table-box{
+    background:white;
+    border-radius:10px;
+    padding:20px;
+    box-shadow:0 0 12px rgba(0,0,0,.15);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#1e3a8a;
+    color:white;
+    padding:12px;
+}
+
+td{
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+.pass{
+    color:green;
+    font-weight:bold;
+}
+
+.fail{
+    color:red;
+    font-weight:bold;
+}
+
+.reset-btn{
+    margin-top:20px;
+    background:#1e3a8a;
+    color:white;
+    border:none;
+    padding:10px 25px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.reset-btn:hover{
+    background:#163170;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+Teacher Dashboard
+</div>
+
+<div class="container">
+
+<div class="cards">
+
+<div class="card" onclick="showAll()">
+<h3>Total Students</h3>
+<h1>{{ total_students }}</h1>
+</div>
+
+<div class="card" onclick="showPassed()">
+<h3>Passed Students</h3>
+<h1>{{ passed_students }}</h1>
+</div>
+
+<div class="card" onclick="showFailed()">
+<h3>Failed Students</h3>
+<h1>{{ failed_students }}</h1>
+</div>
+
+<div class="card" onclick="sortHighest()">
+<h3>Highest Percentage</h3>
+<h1>{{ highest_percentage }}%</h1>
+</div>
+
+</div>
+
+
+<div class="table-box">
+
+<h2 style="color:#1e3a8a;">Student Performance Records</h2>
+
+<table id="studentTable">
+
+<thead>
+
+<tr>
+<th>Name</th>
+<th>Register No</th>
+<th>Total Marks</th>
+<th>Percentage</th>
+<th>Result</th>
+<th>Performance</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for s in students %}
+
+<tr>
+
+<td>{{ s[1] }}</td>
+
+<td>{{ s[2] }}</td>
+
+<td>{{ s[3] }}</td>
+
+<td>{{ s[4] }}%</td>
+
+<td class="{% if s[5]=='PASS' %}pass{% else %}fail{% endif %}">
+{{ s[5] }}
+</td>
+
+<td>
+{% if s[4]>=85 %}
+Excellent
+{% elif s[4]>=70 %}
+Very Good
+{% elif s[4]>=50 %}
+Good
+{% else %}
+Needs Improvement
+{% endif %}
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+<center>
+<button class="reset-btn" onclick="showAll()">Show All Students</button>
+</center>
+
+</div>
+
+</div>
+
+<script>
+
+let table=document.getElementById("studentTable");
+let tbody=table.getElementsByTagName("tbody")[0];
+
+let original=[...tbody.rows];
+
+function showAll(){
+
+tbody.innerHTML="";
+
+original.forEach(r=>{
+tbody.appendChild(r.cloneNode(true));
+});
+
+}
+
+function showPassed(){
+
+tbody.innerHTML="";
+
+original.forEach(r=>{
+
+if(r.cells[4].innerText.trim()=="PASS")
+tbody.appendChild(r.cloneNode(true));
+
+});
+
+}
+
+function showFailed(){
+
+tbody.innerHTML="";
+
+original.forEach(r=>{
+
+if(r.cells[4].innerText.trim()=="FAIL")
+tbody.appendChild(r.cloneNode(true));
+
+});
+
+}
+
+function sortHighest(){
+
+let rows=[...original];
+
+rows.sort(function(a,b){
+
+return parseFloat(b.cells[3].innerText)-parseFloat(a.cells[3].innerText);
+
+});
+
+tbody.innerHTML="";
+
+rows.forEach(r=>tbody.appendChild(r.cloneNode(true)));
+
+}
+
+</script>
+
+</body>
+</html>
